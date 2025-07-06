@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h5>Orders</h5>
+    </div>
+    <div class="card-body">
+        <a href="{{ url_for('create_new_order') }}" class="btn btn-primary mb-3">Create Order</a>
+        {% if orders %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.order_id }}</td>
+                    <td>{{ order.product_name }}</td>
+                    <td>{{ order.quantity_ordered }}</td>
+                    <td>${{ "%.2f"|format(order.total_amount) }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.notes|default('N/A') }}</td>
+                    <td>
+                        {% if current_user.role in ['Admin', 'InventoryManager'] %}
+                        <a href="{{ url_for('process_order', order_id=order.order_id) }}" class="btn btn-primary btn-sm">Process</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info">No orders found.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

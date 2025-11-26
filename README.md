@@ -108,9 +108,3 @@ Welcome to the Inventory Management System (IMS), a web-based application built 
 - **Module Not Found**: Verify all dependencies are installed by re-running `pip install -r requirements.txt`.
 - **Port Conflict**: If `http://127.0.0.1:5000` is in use, modify the port in `app.py` (e.g., `app.run(port=5001)`).
 - **SQL Errors**: Check pgAdmin’s Query Tool output for errors when running `ims_sql.sql`.
-
-## Contributing
-Feel free to fork this repository, make improvements, and submit pull requests. Report issues or suggest features via the Issues tab.
-
-## Contact
-For support, contact yasinkhilji28@gmail.com .
